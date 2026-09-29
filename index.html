@@ -1,80 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dwij | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dwij Bhatt</title>
+<meta name="description" content="Dwij Bhatt: student at JP Stevens High School interested in computer science, cybersecurity, and medicine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <nav>
-            <h2 class="logo">Dwij</h2>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">DB</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#resume">Resume</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-        <div class="hero">
-            <h1>Hello, I'm <span>Dwij</span></h1>
-            <p>Senior Director • Data, Analytics & AI</p>
-            <a href="#projects" class="btn">View My Work</a>
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Computer Science · Cybersecurity · Medicine</p>
+      <h1>Dwij Bhatt</h1>
+      <p class="lede">Student at John P. Stevens High School, Edison, New Jersey (Class of 2027). I'm interested in how software keeps people safe, from the networks behind hospitals to the devices inside patients.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="research.html">Read my research</a>
+        <a class="btn" href="resume.pdf">Download resume (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap two-col">
+      <h2>About</h2>
+      <div>
+        <p>I'm drawn to problems where technology and human health meet. A pacemaker, an insulin pump, or a hospital network is a computer, and when it fails, a person is affected. That overlap is what led me to research the cybersecurity of connected medical devices.</p>
+        <p><span class="ph">[ADD: 2–3 sentences in Dwij's own voice: what sparked this interest, what he does outside class, what he hopes to study.]</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="resume" class="section alt">
+    <div class="wrap">
+      <h2>Resume</h2>
+
+      <div class="resume-block">
+        <h3>Education</h3>
+        <div class="item">
+          <div class="item-head"><strong>John P. Stevens High School</strong><span>Edison, NJ · Class of 2027</span></div>
+          <ul>
+            <li><strong>SAT:</strong> 1560 (Math 800, Reading &amp; Writing 760), September 2026</li>
+            <li><strong>PSAT/NMSQT:</strong> Commended Student, Selection Index 221</li>
+            <li>Member, National Honor Society and Science National Honor Society</li>
+          </ul>
         </div>
-    </header>
+      </div>
 
-    <!-- About -->
-    <section id="about" class="section">
-        <h2>About Me</h2>
-        <p>
-            I’m a Senior Director specializing in Data, Analytics, and AI with 20+ years of experience.
-            I build high‑impact data platforms, lead AI strategy, and help organizations unlock value through
-            modern architectures and intelligent automation.
-        </p>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills" class="section">
-        <h2>Skills</h2>
-        <div class="skills-grid">
-            <div class="skill">AI/ML Strategy</div>
-            <div class="skill">Data Architecture</div>
-            <div class="skill">Cloud (Azure/AWS)</div>
-            <div class="skill">Power BI / Dataverse</div>
-            <div class="skill">Leadership & Mentoring</div>
-            <div class="skill">Enterprise Analytics</div>
+      <div class="resume-block">
+        <h3>Cybersecurity Experience</h3>
+        <div class="item">
+          <div class="item-head"><strong>Advanced Cybersecurity Intern &amp; Co-Leader, NJ Cybersecurity and Communications Integration Cell (NJCCIC)</strong><span>Grades 11–12</span></div>
+          <ul>
+            <li>Selected for a competitive advanced state cybersecurity internship; co-led the intern cohort.</li>
+            <li>Conducted research and threat intelligence analysis; presented a capstone project to state CISO teams.</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="section">
-        <h2>Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>AI Forecasting Engine</h3>
-                <p>Built a predictive analytics engine improving forecast accuracy by 32%.</p>
-            </div>
-            <div class="project-card">
-                <h3>Enterprise Data Platform</h3>
-                <p>Led architecture for a unified data platform serving 40+ business units.</p>
-            </div>
-            <div class="project-card">
-                <h3>Power BI Modernization</h3>
-                <p>Delivered scalable dashboards used by 10k+ global users.</p>
-            </div>
+        <div class="item">
+          <div class="item-head"><strong>Independent Security Researcher, HackerOne</strong><span>Grades 11–12</span></div>
+          <ul>
+            <li>Discovered and responsibly disclosed a DOM-based XSS and an authentication/account-takeover vulnerability in real-world web applications.</li>
+            <li>Wrote detailed technical reports, supported remediation, and earned public acknowledgment from McGraw Hill.</li>
+          </ul>
         </div>
-    </section>
+        <div class="item">
+          <div class="item-head"><strong>Team Leader &amp; Competitor, CyberPatriot (Air Force Association)</strong><span>Grades 9–10</span></div>
+          <ul>
+            <li>Led a team securing Linux and Windows systems under a 4-hour limit; National Semi-Finalist among 25,000+ competitors.</li>
+            <li>Coached teammates in networking, Linux, and Windows administration; completed AFA CyberCamp training.</li>
+          </ul>
+        </div>
+      </div>
 
-    <!-- Contact -->
-    <section id="contact" class="section">
-        <h2>Contact</h2>
-        <p>Email: dwij@example.com</p>
-        <p>LinkedIn: linkedin.com/in/dwij</p>
-    </section>
+      <div class="resume-block">
+        <h3>Research &amp; STEM</h3>
+        <div class="item">
+          <div class="item-head"><strong>Research Volunteer, Paris Observatory, France</strong><span>Grades 10–12</span></div>
+          <ul><li>Worked with researchers on methodology and data analysis; classified scientific data contributing to professional studies.</li></ul>
+        </div>
+        <div class="item">
+          <div class="item-head"><strong>Competitor, AFA StellarXplorers Competition &amp; Camp</strong><span>Grade 11</span></div>
+          <ul><li>National aerospace competition on satellite systems, orbital mechanics, and space operations; earned Systems Tool Kit (STK) certifications.</li></ul>
+        </div>
+        <div class="item">
+          <div class="item-head"><strong>Group Leader &amp; Presenter, TCS goIT Summer App Design Camp</strong><span>Grade 9</span></div>
+          <ul><li>Led a team designing an app framework for a real-world problem; presented to industry mentors.</li></ul>
+        </div>
+      </div>
 
+      <div class="resume-block">
+        <h3>Leadership &amp; Service</h3>
+        <div class="item">
+          <div class="item-head"><strong>Element Leader, Civil Air Patrol (U.S. Air Force Auxiliary)</strong><span>Grades 9–12</span></div>
+          <ul><li>Rose to Cadet Senior Airman; mentored cadets at weekly meetings and assisted with drills.</li></ul>
+        </div>
+        <div class="item">
+          <div class="item-head"><strong>Volunteer, JFK Hospital</strong><span>Grade 12</span></div>
+          <ul><li>Transport patients, restock nursing supplies, and guide families across hospital departments.</li></ul>
+        </div>
+        <div class="item">
+          <div class="item-head"><strong>Member &amp; Peer Tutor, National Honor Society &amp; Science NHS</strong><span>Grades 10–12</span></div>
+          <ul><li>Tutor peers in science; support community service projects, donation drives, and STEM initiatives.</li></ul>
+        </div>
+        <div class="item">
+          <div class="item-head"><strong>Opinion Writer, Newsletter Writer &amp; Video Editor, The Hawkeye &amp; JPS Weekly Media</strong><span>Grades 9–12</span></div>
+          <ul><li>Write <a href="https://hawkeyejps.com/staff_name/dwij-bhatt/">opinion articles</a> and school newsletters; video editor since Grade 11.</li></ul>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <h3>Honors &amp; Awards</h3>
+        <ul>
+          <li>CyberPatriot National Semi-Finalist (Grades 9, 10)</li>
+          <li>Public acknowledgment from McGraw Hill for coordinated vulnerability disclosure (Grade 11)</li>
+          <li>PSAT/NMSQT Commended Student and College Board National Recognition Program (Grade 11)</li>
+          <li>Wright Brothers Award, Civil Air Patrol (Grade 11)</li>
+        </ul>
+      </div>
+
+      <div class="resume-block">
+        <h3>Skills</h3>
+        <div class="tags">
+          <span>Web application security</span><span>Vulnerability disclosure</span><span>Threat intelligence</span><span>Linux</span><span>Windows administration</span><span>Networking</span><span>Systems Tool Kit (STK)</span><span>Video editing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <article class="project featured">
+        <div class="project-tag">Research · In progress</div>
+        <h3><a href="research.html">Securing the Connected Patient</a></h3>
+        <p>A review of cybersecurity vulnerabilities in networked medical devices, from pacemakers to infusion pumps, and a proposed framework for ranking them by clinical impact. Includes case studies, the current FDA regulatory landscape, and an interactive risk-score calculator.</p>
+        <div class="tags"><span>Cybersecurity</span><span>Medical devices</span><span>Risk analysis</span><span>Health policy</span></div>
+        <a class="link-arrow" href="research.html">Read the paper →</a>
+      </article>
+      <article class="project">
+        <div class="project-tag">Security research</div>
+        <h3><a href="https://hackerone.com/dwijb?type=user">Coordinated Vulnerability Disclosure</a></h3>
+        <p>Found and responsibly reported a DOM-based cross-site scripting flaw and an authentication/account-takeover vulnerability in live web applications through HackerOne, then supported the fixes. McGraw Hill publicly acknowledged the disclosure.</p>
+        <div class="tags"><span>Web security</span><span>XSS</span><span>Authentication</span><span>Responsible disclosure</span></div>
+        <a class="link-arrow" href="https://hackerone.com/dwijb?type=user">HackerOne profile →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" class="section alt">
+    <div class="wrap two-col">
+      <h2>Contact</h2>
+      <div>
+        <p>Email: <a href="mailto:you@example.com"><span class="ph">[ADD email]</span></a></p>
+        <p>HackerOne: <a href="https://hackerone.com/dwijb?type=user">hackerone.com/dwijb</a> · Writing: <a href="https://hawkeyejps.com/staff_name/dwij-bhatt/">The Hawkeye</a></p>
+        <p>LinkedIn / GitHub: <span class="ph">[ADD links if any]</span></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer"><div class="wrap">© 2026 Dwij Bhatt</div></footer>
 </body>
 </html>

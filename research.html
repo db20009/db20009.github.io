@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Securing the Connected Patient | Dwij Bhatt</title>
+<meta name="description" content="A review of cybersecurity vulnerabilities in connected medical devices and a clinical-impact-weighted framework for prioritizing them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo">DB</a>
+    <nav>
+      <a href="index.html#about">About</a>
+      <a href="index.html#resume">Resume</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="paper-head">
+  <div class="wrap">
+    <span class="status">Research in progress</span>
+    <h1>Securing the Connected Patient: Vulnerabilities in Networked Medical Devices and a Clinical-Impact Framework for Prioritizing Them</h1>
+    <p class="meta">Dwij Bhatt · John P. Stevens High School, Edison, NJ · <span class="ph">[ADD date / mentor]</span></p>
+  </div>
+</section>
+
+<article class="paper">
+
+  <p><a class="back" href="index.html#projects">← Back to projects</a></p>
+
+  <h2 id="abstract">Abstract</h2>
+  <div class="abstract">
+    <p>Pacemakers, insulin pumps, infusion pumps, and imaging systems now run software and connect to wireless or hospital networks. That connectivity improves care, but it also means a software flaw can put a patient's health at risk. This paper reviews major publicly disclosed medical device vulnerabilities from 2011 onward and summarizes how U.S. regulation has responded, especially Section 524B of the Federal Food, Drug, and Cosmetic Act, in effect since 2023. It then argues that standard vulnerability scores, which measure technical severity, do not capture clinical harm. As an alternative, I propose a <em>Clinical-Impact-Weighted Risk Score (CIWRS)</em> that combines exploitability, potential patient harm, and device exposure. The next phase of this project applies the score to a dataset of public CISA medical advisories to test whether it ranks vulnerabilities differently than technical scores alone.</p>
+  </div>
+
+  <div class="toc">
+    <strong>Contents</strong>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#background">What makes medical devices different</a></li>
+      <li><a href="#cases">Case studies</a></li>
+      <li><a href="#regulation">The regulatory response</a></li>
+      <li><a href="#gap">The gap: technical severity ≠ patient harm</a></li>
+      <li><a href="#framework">Proposed framework (CIWRS)</a></li>
+      <li><a href="#method">Methodology for the next phase</a></li>
+      <li><a href="#recs">Recommendations</a></li>
+      <li><a href="#limits">Limitations</a></li>
+      <li><a href="#refs">References</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro">1. Introduction</h2>
+  <p>A modern hospital can have more connected devices than staff. Bedside monitors report to central stations, infusion pumps receive drug libraries over Wi-Fi, and implanted cardiac devices send data to physicians from patients' homes. Each connection is useful, and each one is also a possible entry point for an attacker.</p>
+  <p>In most computer systems, a successful attack means lost data or money. In medical devices, the consequence can be physical: a wrong drug dose, a disabled alarm, or a device that stops working. This project asks two questions:</p>
+  <ul>
+    <li><strong>RQ1:</strong> What kinds of vulnerabilities have been publicly disclosed in connected medical devices, and how have manufacturers and regulators responded?</li>
+    <li><strong>RQ2:</strong> Would ranking vulnerabilities by potential <em>clinical</em> impact, rather than by technical severity alone, change which ones get fixed first?</li>
+  </ul>
+
+  <h2 id="background">2. What makes medical devices different</h2>
+  <p>Securing a medical device is harder than securing a laptop, for several reasons:</p>
+  <ul>
+    <li><strong>Long lifespans.</strong> Hospital equipment is often used for many years, and an implanted device stays in a patient for its whole battery life. Software written for one threat environment ends up running in another.</li>
+    <li><strong>Limited resources.</strong> Implants run on small batteries and simple processors. Strong encryption and frequent updates use power and computing capacity the device may not have.</li>
+    <li><strong>Hard-to-apply patches.</strong> Updating a laptop takes minutes. Updating a pacemaker may require a clinic visit, and changes to device software can require regulatory review.</li>
+    <li><strong>Safety over security.</strong> Devices are designed to fail "open" so clinicians can always reach them in an emergency. Security controls like passwords can conflict with that goal.</li>
+    <li><strong>Shared components.</strong> Many devices reuse the same operating systems and wireless chips, so one flaw can affect products from many manufacturers at once.</li>
+  </ul>
+
+  <h2 id="cases">3. Case studies</h2>
+  <p>The table below summarizes widely reported cases. Together they show that the problem spans implants, hospital equipment, and the shared software underneath them.</p>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Year</th><th>Device / component</th><th>Issue</th><th>Response</th></tr></thead>
+    <tbody>
+      <tr><td>2011</td><td>Insulin pump</td><td>Security researcher Jay Radcliffe demonstrated at the Black Hat conference that a pump's wireless commands could be intercepted and altered.</td><td>Brought public attention to implantable and wearable device security.</td></tr>
+      <tr><td>2015</td><td>Hospira Symbiq infusion pump</td><td>Vulnerabilities could let an unauthorized user remotely change pump settings over a hospital network.</td><td>FDA advised hospitals to stop using the pump. It was one of the first FDA cybersecurity warnings for a specific device.</td></tr>
+      <tr><td>2017</td><td>Abbott (formerly St. Jude Medical) pacemakers</td><td>Radio-frequency weaknesses could let a nearby attacker change pacing or drain the battery.</td><td>FDA-approved firmware update for about 465,000 U.S. patients, applied during a clinic visit.</td></tr>
+      <tr><td>2019</td><td>Medtronic MiniMed insulin pumps</td><td>Some older pumps could not be secured against unauthorized wireless commands.</td><td>Recall. FDA advised patients to switch to newer models, since the old ones could not be patched.</td></tr>
+      <tr><td>2019</td><td>URGENT/11 (IPnet networking software)</td><td>Flaws in a networking component used by some real-time operating systems, which appear in many devices, including medical equipment.</td><td>FDA safety communication. It showed how supply-chain software spreads risk across many products.</td></tr>
+      <tr><td>2020</td><td>SweynTooth (Bluetooth Low Energy chips)</td><td>Flaws in Bluetooth chips could crash or take over devices, including some medical ones.</td><td>FDA safety communication and manufacturer assessments.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><strong>Pattern:</strong> The same themes keep appearing. Wireless protocols lacked authentication, legacy devices could not be updated, and third-party components carried flaws into many products. The 2019 insulin pump recall shows that the fix is sometimes to replace the device entirely.</p>
+
+  <h2 id="regulation">4. The regulatory response</h2>
+  <p>U.S. regulation has moved from voluntary guidance toward legal requirements:</p>
+  <ul>
+    <li><strong>2014:</strong> FDA premarket guidance asked manufacturers to address cybersecurity in device submissions.</li>
+    <li><strong>2016:</strong> FDA postmarket guidance described how manufacturers should monitor and respond to vulnerabilities after a device is on the market.</li>
+    <li><strong>2023:</strong> The Consolidated Appropriations Act, 2023 added <strong>Section 524B</strong> to the Food, Drug, and Cosmetic Act. Since March 2023, manufacturers of "cyber devices" must submit a plan to monitor and address vulnerabilities, provide a <em>Software Bill of Materials (SBOM)</em> listing the software components inside the device, and show that the device can be updated and patched.</li>
+  </ul>
+  <p>The SBOM requirement directly addresses the supply-chain problem from URGENT/11 and SweynTooth. When a flaw is found in a shared component, hospitals and regulators can quickly identify which devices contain it. The law mainly applies to new devices, though, and many older devices remain in use.</p>
+
+  <h2 id="gap">5. The gap: technical severity ≠ patient harm</h2>
+  <p>Security teams usually prioritize vulnerabilities using the Common Vulnerability Scoring System (CVSS), a 0–10 score based mostly on how easy a flaw is to exploit and what it does to confidentiality, integrity, and availability. CVSS was designed for IT systems, so it doesn't consider what the device <em>does to a body</em>.</p>
+  <p>Consider two hypothetical flaws:</p>
+  <ul>
+    <li><strong>Flaw A:</strong> A remotely exploitable bug that leaks non-sensitive logs from a hospital thermometer station. The CVSS score might be high because it is easy to exploit over the network.</li>
+    <li><strong>Flaw B:</strong> A bug that requires an attacker to be physically close, but that could change the dose on an insulin pump. The CVSS score might be moderate because proximity makes it harder to exploit.</li>
+  </ul>
+  <p>From a patient's point of view, Flaw B is clearly more dangerous. A hospital with limited staff that fixes vulnerabilities in CVSS order might address Flaw A first. MITRE has published a rubric for applying CVSS to medical devices, which shows the field recognizes this problem. This project explores a simpler score that makes clinical impact explicit.</p>
+
+  <h2 id="framework">6. Proposed framework: Clinical-Impact-Weighted Risk Score (CIWRS)</h2>
+  <p>CIWRS multiplies three factors, each scored from 1 to 5:</p>
+  <div class="formula">CIWRS = Exploitability × Clinical Harm × Exposure &nbsp;&nbsp;(range 1–125)</div>
+  <ul>
+    <li><strong>Exploitability (E):</strong> How easy is the attack? 1 = physical access plus special equipment. 5 = remote, over the internet, no authentication.</li>
+    <li><strong>Clinical Harm (H):</strong> The worst realistic outcome for a patient. 1 = no patient effect (e.g., a data leak only). 3 = delayed or degraded care. 5 = direct life-threatening effect (e.g., a therapy change in an implant or pump).</li>
+    <li><strong>Exposure (X):</strong> How many patients, and how long? 1 = rare device, easy to patch. 5 = widely deployed, cannot be patched, or implanted.</li>
+  </ul>
+  <p>Multiplying the factors means a vulnerability scores highly only when it is <em>both</em> reachable and dangerous. The example calculator below shows how the two flaws from Section 5 compare.</p>
+
+  <div class="calc" id="calc">
+    <strong>Try it: CIWRS calculator</strong>
+    <label for="e">Exploitability</label>
+    <select id="e">
+      <option value="1">1: Physical access + special equipment</option>
+      <option value="2">2: Physical access</option>
+      <option value="3" selected>3: Nearby wireless (Bluetooth / RF)</option>
+      <option value="4">4: Hospital network access</option>
+      <option value="5">5: Remote over the internet, no authentication</option>
+    </select>
+    <label for="h">Clinical harm</label>
+    <select id="h">
+      <option value="1">1: No patient effect (data exposure only)</option>
+      <option value="2">2: Minor inconvenience</option>
+      <option value="3">3: Delayed or degraded care</option>
+      <option value="4">4: Serious injury possible</option>
+      <option value="5" selected>5: Direct life-threatening effect</option>
+    </select>
+    <label for="x">Exposure</label>
+    <select id="x">
+      <option value="1">1: Rare device, easily patched</option>
+      <option value="2">2: Limited deployment</option>
+      <option value="3">3: Moderate deployment</option>
+      <option value="4" selected>4: Widely deployed, patching difficult</option>
+      <option value="5">5: Implanted or unpatchable</option>
+    </select>
+    <div class="calc-out" id="out"></div>
+  </div>
+
+  <h2 id="method">7. Methodology for the next phase</h2>
+  <p>To test RQ2, the next phase will:</p>
+  <ol>
+    <li><strong>Collect data:</strong> Gather the Industrial Control Systems Medical Advisories (ICSMA) published by CISA, which describe vulnerabilities in medical products along with their CVSS scores.</li>
+    <li><strong>Code each advisory:</strong> Record device category, attack vector, vulnerability type, CVSS score, patch availability, and whether the device is implanted.</li>
+    <li><strong>Assign CIWRS scores</strong> with a written rubric, and have a second reviewer <span class="ph">[ADD: mentor / clinician]</span> score a sample to check consistency.</li>
+    <li><strong>Compare rankings:</strong> Measure how differently CVSS and CIWRS order the same vulnerabilities (for example, with a rank correlation), and identify the cases where they disagree most.</li>
+    <li><strong>Report trends</strong> by device category and year.</li>
+  </ol>
+  <p><span class="ph">[Results will be added here once the analysis is complete.]</span></p>
+
+  <h2 id="recs">8. Recommendations</h2>
+  <ul>
+    <li><strong>Hospitals:</strong> Keep an inventory of connected devices, place medical devices on separate network segments, and use SBOMs to respond quickly when component flaws are disclosed.</li>
+    <li><strong>Manufacturers:</strong> Build authentication into wireless protocols from the start and design devices so they can be updated securely over their whole life.</li>
+    <li><strong>Regulators and researchers:</strong> Include clinical impact in how vulnerabilities are prioritized, and address the large number of older devices that current rules don't cover.</li>
+    <li><strong>Patients:</strong> Known device vulnerabilities have rarely, if ever, been confirmed as used to harm a patient. The benefits of these devices far outweigh the risk, and patients should follow their doctor's advice about updates.</li>
+  </ul>
+
+  <h2 id="limits">9. Limitations</h2>
+  <p>This study uses only publicly disclosed vulnerabilities, which likely undercounts the real total. CIWRS scoring involves judgment, especially for clinical harm, so input from clinicians is important. The framework is a proposal meant to show a gap in current prioritization, not a validated clinical tool.</p>
+
+  <h2 id="refs">10. References</h2>
+  <ol class="refs">
+    <li>U.S. Food and Drug Administration. <em>Cybersecurity in Medical Devices</em> (program page, premarket and postmarket guidance, and safety communications). <a href="https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity">fda.gov</a></li>
+    <li>Federal Food, Drug, and Cosmetic Act, Section 524B, "Ensuring Cybersecurity of Devices," added by the Consolidated Appropriations Act, 2023.</li>
+    <li>Cybersecurity and Infrastructure Security Agency (CISA). ICS Medical Advisories (ICSMA). <a href="https://www.cisa.gov/news-events/cybersecurity-advisories">cisa.gov</a></li>
+    <li>FDA Safety Communication: Cybersecurity vulnerabilities of Hospira Symbiq infusion system (2015).</li>
+    <li>FDA Safety Communication: Firmware update for Abbott (St. Jude Medical) implantable pacemakers (2017).</li>
+    <li>FDA Safety Communication: Certain Medtronic MiniMed insulin pumps have potential cybersecurity risks (2019).</li>
+    <li>FDA Safety Communications: URGENT/11 (2019) and SweynTooth (2020) vulnerabilities.</li>
+    <li>MITRE Corporation. <em>Rubric for Applying CVSS to Medical Devices.</em></li>
+    <li>FIRST. <em>Common Vulnerability Scoring System (CVSS) Specification.</em> <a href="https://www.first.org/cvss/">first.org</a></li>
+    <li><span class="ph">[ADD any academic papers Dwij reads, e.g., via Google Scholar]</span></li>
+  </ol>
+
+  <p><a class="back" href="index.html#projects">← Back to projects</a></p>
+</article>
+
+<footer class="footer"><div class="wrap">© 2026 Dwij Bhatt</div></footer>
+
+<script>
+  (function () {
+    var e = document.getElementById('e'), h = document.getElementById('h'),
+        x = document.getElementById('x'), out = document.getElementById('out');
+    function update() {
+      var s = (+e.value) * (+h.value) * (+x.value);
+      var level = s >= 60 ? 'Critical: prioritize immediately'
+                : s >= 30 ? 'High: address soon'
+                : s >= 12 ? 'Moderate: schedule fix'
+                : 'Low: monitor';
+      out.innerHTML = 'CIWRS: <strong>' + s + '</strong> / 125 &nbsp;·&nbsp; ' + level;
+    }
+    [e, h, x].forEach(function (el) { el.addEventListener('change', update); });
+    update();
+  })();
+</script>
+</body>
+</html>
